@@ -256,7 +256,7 @@ h6::before {
 #content-inner.layout h4:hover,
 #content-inner.layout h5:hover,
 #content-inner.layout h6:hover {
-  color: var(--theme-color);
+  color: orange;
 }
 #content-inner.layout h1:hover::before,
 #content-inner.layout h2:hover::before,
@@ -264,7 +264,7 @@ h6::before {
 #content-inner.layout h4:hover::before,
 #content-inner.layout h5:hover::before,
 #content-inner.layout h6:hover::before {
-  color: var(--theme-color);
+  color: orange;
   -webkit-animation: ccc 6s linear infinite;
   animation: ccc 6s linear infinite;
 }
