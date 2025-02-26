@@ -1,0 +1,25 @@
+#workboard{font-size:13px;font-weight:700}
+
+/* 悬停时显示徽标提示语的样式 */
+a.github-badge:hover:before {
+    position: fixed; /* 固定定位 */
+    width: fit-content; /* 宽度根据内容自适应 */
+    margin: auto; /* 自动居中 */
+    left: 0; /* 左对齐 */
+    right: 0; /* 右对齐 */
+    top: 10%; /* 距离顶部10% */
+    border-radius: 10px; /* 圆角边框 */
+    text-align: center; /* 文字居中 */
+    z-index: 100; /* 层级高于其他元素 */
+    content: attr(data-title); /* 显示data-title属性的内容 */
+    font-size: 20px; /* 字体大小 */
+    color: #fff; /* 文字颜色为白色 */
+    padding: 10px; /* 内边距 */
+    background-color: var(--text-bg-hover); /* 背景颜色为变量 */
+  }
+  
+  /* 暗色主题下悬停提示语的样式 */
+  [data-theme=dark] a.github-badge:hover:before {
+    background-color: rgba(18,18,18,0.8); /* 背景颜色为深灰色 */
+  }
+  
