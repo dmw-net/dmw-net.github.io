@@ -193,7 +193,7 @@ subtitle:
   # 1 - hitokoto.cn
   # 2 - yijuzhan.com
   # 3 - jinrishici.com
-  source: 2
+  source: 3
   # 如果关闭打字机效果，副标题将仅显示 sub 的第一行内容
   sub:
     - 愿无病无灾，愿世界和平
