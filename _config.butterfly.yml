@@ -193,11 +193,11 @@ subtitle:
   # 1 - hitokoto.cn
   # 2 - yijuzhan.com
   # 3 - jinrishici.com
-  source: 3
+  source: 2
   # 如果关闭打字机效果，副标题将仅显示 sub 的第一行内容
   sub:
-    - 尽人事,知天命
-    - 事在人为
+    - 愿无病无灾，愿世界和平
+    - 欢迎光临！
 
 # 首页文章佈局
 # 1: 行佈局
@@ -1326,11 +1326,11 @@ electric_clock:
   default_rectangle: false # 开启后将一直显示rectangle位置的天气，否则将获取访问者的地理位置与天气
   rectangle: 112.935066,28.235059 # 获取访问者位置失败时会显示该位置的天气，同时该位置为开启default_rectangle后的位置
 
-
+# 首页分类磁贴
 # hexo-butterfly-categories-card
 # see https://akilar.top/posts/a9131002/
 categoryBar:
-  enable: true # 开关
+  enable: false # 开关
   priority: 5 #过滤器优先权
   enable_page: / # 应用页面
   layout: # 挂载容器类型
@@ -1340,12 +1340,30 @@ categoryBar:
   column: odd # odd：3列 | even：4列
   row: 1 #显示行数，默认两行，超过行数切换为滚动显示
   message:
-    - descr: 搭建博客相关文章
-      cover: /img/bg/bg-剑客-水墨.png
     - descr: Java学习记录与总结
+      cover: /img/bg/bg-剑客-水墨.png
+    - descr: 算法学习
       cover: /img/bg/bg-动漫-蜡笔小新.png
-    - descr: 个人日记
+    - descr: 搭建博客相关文章
       cover: /img/bg/bg-动漫-蜡笔小新.png
-    - descr: 学习记录
+    - descr: 计算机基础
       cover: /img/bg/bg-笑嘻嘻-美女.png
   custom_css: https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css
+
+# 文章置顶轮播图
+# hexo-butterfly-swiper
+# see https://akilar.top/posts/8e1264d1/
+swiper:
+  enable: true # 开关
+  priority: 5 #过滤器优先权
+  enable_page: all # 应用页面
+  timemode: date #date/updated
+  layout: # 挂载容器类型
+    type: id
+    name: recent-posts
+    index: 0
+  default_descr: 再怎么看我也不知道怎么描述它的啦！
+  swiper_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css #swiper css依赖
+  swiper_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js #swiper js依赖
+  custom_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css # 适配主题样式补丁
+  custom_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js # swiper初始化方法

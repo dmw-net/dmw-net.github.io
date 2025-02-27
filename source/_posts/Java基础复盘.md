@@ -4,6 +4,7 @@ date: 2025-02-04
 updated: 2025-02-17
 tags: java基础
 categories: java
+swiper_index: 1 #置顶轮播图顺序，非负整数，数字越大越靠前
 ---
 
 ## 一、Java概述

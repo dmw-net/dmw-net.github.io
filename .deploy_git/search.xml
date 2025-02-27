@@ -23,12 +23,18 @@
     
     
     <entry>
-      <title></title>
+      <title>刷题注意事项</title>
       <link href="/2025/02/24/%E5%88%B7%E9%A2%98%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
       <url>/2025/02/24/%E5%88%B7%E9%A2%98%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
       
         <content type="html"><![CDATA[<p><strong>1.scanf和printf</strong></p><p>用于格式化输入输出</p><p>不能取消同步流</p><p><strong>2.cin和cout（c++特性</strong>）</p><p>简洁，在取消同步流的情况下一般比scanf更快</p><p>取消同步流一定要写完整</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure><p>一般不要使用cout &lt;&lt; endl;改用cout &lt;&lt; ‘\n’;</p><p>endl&#x3D;’\n’+强制刷新缓冲区（比较慢而且一般也不需要）</p><p><strong>3.输入就单独的输入，一会输入做io,一会做计算反而慢一点。</strong></p><p>4.定义时一般使用using type xx &#x3D; xxx;而不是#define xx xxx;前者为一个变量，后者为整体带入，如果没括号可能会导致计算错误。</p>]]></content>
       
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
       
       
     </entry>
