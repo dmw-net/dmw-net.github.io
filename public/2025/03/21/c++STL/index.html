@@ -1,0 +1,687 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C++STL | dmw's blog</title><meta name="author" content="dmw"><meta name="copyright" content="dmw"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C++ 标准模板库 (STL, Standard Template Library)：包含一些常用数据结构与算法的模板的 C++ 软件库。其包含四个组件——算法 (Algorithms)、容器 (Containers)、仿函数 (Functors)、迭代器 (Iterators). 示例：  算法：sort(a.begin(), a.end()) 容器：queue&lt;int&gt; que 仿">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++STL">
+<meta property="og:url" content="https://dmw.2025521.xyz/2025/03/21/c++STL/index.html">
+<meta property="og:site_name" content="dmw&#39;s blog">
+<meta property="og:description" content="C++ 标准模板库 (STL, Standard Template Library)：包含一些常用数据结构与算法的模板的 C++ 软件库。其包含四个组件——算法 (Algorithms)、容器 (Containers)、仿函数 (Functors)、迭代器 (Iterators). 示例：  算法：sort(a.begin(), a.end()) 容器：queue&lt;int&gt; que 仿">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dmw.2025521.xyz/img/bg/bg-1.jpg">
+<meta property="article:published_time" content="2025-03-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-20T16:00:00.000Z">
+<meta property="article:author" content="dmw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dmw.2025521.xyz/img/bg/bg-1.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C++STL",
+  "url": "https://dmw.2025521.xyz/2025/03/21/c++STL/",
+  "image": "https://dmw.2025521.xyz/img/bg/bg-1.jpg",
+  "datePublished": "2025-03-20T16:00:00.000Z",
+  "dateModified": "2025-03-20T16:00:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "dmw",
+      "url": "https://dmw.2025521.xyz/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/my/%E5%B0%8F%E5%9F%8B1.jpg"><link rel="canonical" href="https://dmw.2025521.xyz/2025/03/21/c++STL/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++STL',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/progress_bar.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="/css/footer.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/progress_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg" style="background-image: url(/img/bg/bg-1.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/my/%E5%B0%8F%E5%9F%8B1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope-open"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/bg/bg-1.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/my/logo.jpg" alt="Logo"><span class="site-name">dmw's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">C++STL</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope-open"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">C++STL</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-20T16:00:00.000Z" title="发表于 2025-03-21 00:00:00">2025-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-20T16:00:00.000Z" title="更新于 2025-03-21 00:00:00">2025-03-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="waline-pageview-count" data-path="/2025/03/21/c++STL/"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2025/03/21/c++STL/#post-comment"><span class="waline-comment-count" data-path="/2025/03/21/c++STL/"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><strong>C++ 标准模板库 (STL, Standard Template Library)</strong>：包含一些常用数据结构与算法的模板的 C++ 软件库。其包含四个组件——算法 (Algorithms)、容器 (Containers)、仿函数 (Functors)、迭代器 (Iterators).</p>
+<p>示例：</p>
+<ul>
+<li>算法：<code>sort(a.begin(), a.end())</code></li>
+<li>容器：<code>queue&lt;int&gt; que</code></li>
+<li>仿函数：<code>greater&lt;int&gt;()</code></li>
+<li>迭代器：<code>vector&lt;int&gt;::iterator it = a.begin()</code></li>
+</ul>
+<h2 id="队列queue"><a href="#队列queue" class="headerlink" title="队列queue"></a>队列queue</h2><h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><p>先进先出</p>
+<h3 id="操作："><a href="#操作：" class="headerlink" title="操作："></a>操作：</h3><table>
+<thead>
+<tr>
+<th align="center">作用</th>
+<th align="center">操作</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">构造</td>
+<td align="center">queue&lt;类型&gt; que</td>
+<td align="center">queue&lt; int &gt; que;</td>
+</tr>
+<tr>
+<td align="center">进队</td>
+<td align="center">.push(元素)</td>
+<td align="center">que.push(1);</td>
+</tr>
+<tr>
+<td align="center">出队</td>
+<td align="center">.pop()</td>
+<td align="center">que.pop();</td>
+</tr>
+<tr>
+<td align="center">取队首</td>
+<td align="center">.front()</td>
+<td align="center">int a &#x3D; que.front();</td>
+</tr>
+<tr>
+<td align="center">取队尾</td>
+<td align="center">.back()</td>
+<td align="center">int a &#x3D; que.back();</td>
+</tr>
+<tr>
+<td align="center">查看大小</td>
+<td align="center">.size()</td>
+<td align="center">que.size()</td>
+</tr>
+<tr>
+<td align="center">判空</td>
+<td align="center">.empty()</td>
+<td align="center">bool emp &#x3D; que.empty()</td>
+</tr>
+<tr>
+<td align="center">清空</td>
+<td align="center">无</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+<p>创建队列对象：queue&lt;元素类型&gt; 队列名</p>
+<p><strong>添加</strong>元素：队列名.push(元素名)；</p>
+<p><strong>删除</strong>元素：队列名.pop();</p>
+<p>判断<strong>是否为空</strong>：队列名.empty()；</p>
+<p>返回队列的<strong>大小</strong>：队列名.size();</p>
+<h3 id="注意事项：不可访问内部元素！"><a href="#注意事项：不可访问内部元素！" class="headerlink" title="注意事项：不可访问内部元素！"></a>注意事项：不可访问内部元素！</h3><p><strong>下面都是错误用法</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; que.<span class="built_in">size</span>(); i++)</span><br><span class="line">    cout &lt;&lt; que[i] &lt;&lt; endl;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> ele : que)</span><br><span class="line">    cout &lt;&lt; ele &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<h2 id="栈stack"><a href="#栈stack" class="headerlink" title="栈stack"></a>栈stack</h2><h3 id="特点：-1"><a href="#特点：-1" class="headerlink" title="特点："></a>特点：</h3><p>先进后出FILO；</p>
+<p>从栈顶删除元素；</p>
+<p>在栈顶加入元素。</p>
+<h3 id="操作：-1"><a href="#操作：-1" class="headerlink" title="操作："></a>操作：</h3><table>
+<thead>
+<tr>
+<th align="center">作用</th>
+<th align="center">操作</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">构造</td>
+<td align="center">stack&lt;类型&gt; stk</td>
+<td align="center">stack&lt; int&gt; stk;</td>
+</tr>
+<tr>
+<td align="center">进栈</td>
+<td align="center">.push(元素)</td>
+<td align="center">stk.push(1);</td>
+</tr>
+<tr>
+<td align="center">出栈</td>
+<td align="center">.pop()</td>
+<td align="center">stk.pop();</td>
+</tr>
+<tr>
+<td align="center">取栈顶</td>
+<td align="center">.top()</td>
+<td align="center">int a &#x3D; stk.top();</td>
+</tr>
+<tr>
+<td align="center">查看大小</td>
+<td align="center">.size()</td>
+<td align="center">que.size()</td>
+</tr>
+<tr>
+<td align="center">判空</td>
+<td align="center">.empty()</td>
+<td align="center">bool emp &#x3D; stk.empty()</td>
+</tr>
+<tr>
+<td align="center">清空</td>
+<td align="center">无</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+<p>创建栈对象：stack&lt;元素类型&gt; 栈名</p>
+<p>栈顶<strong>添加</strong>元素：栈名.push(元素名)；</p>
+<p><strong>删除</strong>栈顶元素：栈名.pop();</p>
+<p><strong>访问</strong>栈顶元素:栈名.top();<strong>&#x2F;&#x2F;要先确保栈非空</strong></p>
+<p>判断<strong>是否为空</strong>：栈名.empty()；</p>
+<p>返回栈的<strong>大小</strong>：栈名.size();</p>
+<p><strong>tips:栈和队列一样，没有clear之类的函数，如果想要清空一个栈，需要循环调用出栈函数。</strong></p>
+<p>eg:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">stack&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">s.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line">s.<span class="built_in">push</span>(<span class="number">2</span>);</span><br><span class="line">s.<span class="built_in">push</span>(<span class="number">3</span>);</span><br><span class="line">s.<span class="built_in">pop</span>();</span><br><span class="line">cout&lt;&lt;s.<span class="built_in">top</span>()&lt;&lt;endl;<span class="comment">//2</span></span><br><span class="line">s.<span class="built_in">top</span>()+=<span class="number">3</span>;</span><br><span class="line">cout&lt;&lt;s.<span class="built_in">top</span>()&lt;&lt;endl;<span class="comment">//5</span></span><br><span class="line"><span class="keyword">while</span>(!s.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">	s.<span class="built_in">pop</span>();</span><br><span class="line">&#125;</span><br><span class="line">cout&lt;&lt;s.<span class="built_in">size</span>()&lt;&lt;endl;<span class="comment">//0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="注意事项-不可访问内部元素！"><a href="#注意事项-不可访问内部元素！" class="headerlink" title="注意事项:不可访问内部元素！"></a>注意事项:不可访问内部元素！</h3><p>以下是错误示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; stk.<span class="built_in">size</span>(); i++)</span><br><span class="line">    cout &lt;&lt; stk[i] &lt;&lt; endl;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> ele : stk)</span><br><span class="line">    cout &lt;&lt; stk &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<h3 id="典例：括号匹配"><a href="#典例：括号匹配" class="headerlink" title="典例：括号匹配"></a>典例：括号匹配</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">	stack&lt;<span class="type">char</span>&gt; p;</span><br><span class="line">	p.<span class="built_in">push</span>(<span class="string">&#x27;#&#x27;</span>);<span class="comment">//设置哨兵，防止RE</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; s.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>(s[i]==<span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(p.<span class="built_in">top</span>() == <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">				p.<span class="built_in">pop</span>();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(s[i] == <span class="string">&#x27;]&#x27;</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(p.<span class="built_in">top</span>() == <span class="string">&#x27;[&#x27;</span>) &#123;</span><br><span class="line">				p.<span class="built_in">pop</span>();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> p.<span class="built_in">push</span>(s[i]);<span class="comment">//左括号直接入栈，右括号就判断匹配</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> (p.<span class="built_in">size</span>() == <span class="number">1</span>);<span class="comment">//如果全能匹配上就只剩哨兵</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	string s;</span><br><span class="line">	<span class="keyword">while</span>(cin &gt;&gt; s) &#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">check</span>(s)) &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;Yes\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;No\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串string"><a href="#字符串string" class="headerlink" title="字符串string"></a>字符串string</h2><h3 id="操作：-2"><a href="#操作：-2" class="headerlink" title="操作："></a>操作：</h3><p>创建：string s;</p>
+<p>求长度:s.length(); 或者 s.size();</p>
+<p>连接： 直接用+、+&#x3D;运算符 或者append函数</p>
+<p>比较：直接用运算符&lt; 、 &gt;  、!&#x3D;、 &#x3D;&#x3D; 等等或者compare函数</p>
+<p>求子串：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = <span class="string">&quot;this is ok&quot;</span>;</span><br><span class="line">string s2 = s<span class="number">1.</span><span class="built_in">substr</span>(<span class="number">2</span>, <span class="number">4</span>);<span class="comment">// s2 = &quot;is i&quot;</span></span><br><span class="line">s2 = s<span class="number">1.</span><span class="built_in">substr</span>(<span class="number">2</span>); <span class="comment">// s2 = &quot;is is ok&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>插入字符串：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string s1 = <span class="string">&quot;Limitless&quot;</span>;</span><br><span class="line">string s2 = <span class="string">&quot;00&quot;</span>;</span><br><span class="line">s<span class="number">1.</span><span class="built_in">insert</span>(<span class="number">2</span>, <span class="string">&quot;123&quot;</span>);<span class="comment">//s1 = &quot;Li123mitless&quot;</span></span><br><span class="line">s<span class="number">1.</span><span class="built_in">insert</span>(<span class="number">3</span>, s2); <span class="comment">// s1 = &quot;Li10023mitless&quot;</span></span><br><span class="line">s<span class="number">1.</span><span class="built_in">insert</span>(<span class="number">3</span>, <span class="number">5</span>, <span class="string">&#x27;X&#x27;</span>) <span class="comment">// s1 = &quot;Li1XXXXX0023mitless&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>删除子串：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = <span class="string">&quot;Reak Steel&quot;</span>;</span><br><span class="line">s<span class="number">1.</span><span class="built_in">erase</span>(<span class="number">1</span>, <span class="number">3</span>); <span class="comment">//s1 = &quot;R Steel&quot;</span></span><br><span class="line">s<span class="number">1.</span><span class="built_in">erase</span>(<span class="number">5</span>); <span class="comment">//s1 = &quot;R ste</span></span><br></pre></td></tr></table></figure>
+
+<p>交换两个string对象的内容：swap函数：s1.swap(s2);</p>
+<p>查找：</p>
+<p>s1.find(str) 查找字符串str在当前字符串s中第一次出现的位置</p>
+<p>s1.find(str, pos) 查找字符串str在当前字符串s的[pos, end]中第一次出现的位置</p>
+<p>全排列的下一个序列：next_permutation（s.begin(), s.end()）</p>
+<p>全排列的前一个序列：prev_permutation（s.begin(), s.end()）</p>
+<p>翻转字符串：reverse（s.begin(), s.end())</p>
+<h2 id="动态数组、向量vector"><a href="#动态数组、向量vector" class="headerlink" title="动态数组、向量vector"></a>动态数组、向量vector</h2><h3 id="操作：-3"><a href="#操作：-3" class="headerlink" title="操作："></a>操作：</h3><p>创建：vector&lt;数据类型&gt; 向量名；</p>
+<p>初始化：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; abc;<span class="comment">//初始化一个size为0的vector，最常用</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">abc</span><span class="params">(<span class="number">10</span>)</span>;<span class="comment">//初始化了10个默认值为0的元素</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">abc</span><span class="params">(<span class="number">10</span>, <span class="number">1</span>)</span>;<span class="comment">//初始化了10个值为1的元素</span></span><br></pre></td></tr></table></figure>
+
+<p>访问：</p>
+<p>首元素：v.front()</p>
+<p>尾元素：v.back（）</p>
+<p>下标访问类似普通数组</p>
+<p>添加元素：</p>
+<p>向尾部添加：v.push_back(value);&#x2F;&#x2F;最常见的操作</p>
+<p>下标赋值注意别超出v.size（）</p>
+<p>求元素个数：v.size（）&#x2F;&#x2F;实际元素个数，不是容量</p>
+<p>判空：v.empty();</p>
+<p>翻转操作：reverse(v.begin(), v.end());</p>
+<p>清空：v.clear（）&#x2F;&#x2F;直接清空，不是变成0</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><h4 id="提前指定长度"><a href="#提前指定长度" class="headerlink" title="提前指定长度"></a>提前指定长度</h4><p>如果长度已经确定，那么应当直接在构造函数指定长度，而不是一个一个 <code>.push_back()</code>. 因为 <code>vector</code> 额外内存耗尽后的重分配是有时间开销的，直接指定长度就不会出现重分配了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 优化前: 522ms</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; a;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1e8</span>; i++)</span><br><span class="line">    a.<span class="built_in">push_back</span>(i);</span><br><span class="line"><span class="comment">// 优化后: 259ms</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(<span class="number">1e8</span>)</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; a.<span class="built_in">size</span>(); i++)</span><br><span class="line">    a[i] = i;</span><br></pre></td></tr></table></figure>
+
+<h4 id="当心-size-t-溢出"><a href="#当心-size-t-溢出" class="headerlink" title="当心 size_t 溢出"></a>当心 size_t 溢出</h4><p>vector 获取长度的方法 <code>.size()</code> 返回值类型为 <code>size_t</code>，通常 OJ 平台使用的是 32 位编译器（有些平台例如 cf 可选 64 位），那么该类型范围为 [0,232).</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(<span class="number">65536</span>)</span></span>;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> a = a.<span class="built_in">size</span>() * a.<span class="built_in">size</span>(); <span class="comment">// 直接溢出变成0了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="典例：二维向量存储邻接表"><a href="#典例：二维向量存储邻接表" class="headerlink" title="典例：二维向量存储邻接表"></a>典例：二维向量存储邻接表</h3><h2 id="集合set"><a href="#集合set" class="headerlink" title="集合set"></a>集合set</h2><p>数学上集合的特点：确定性，互异性，无序性</p>
+<p>stl中：有序的，元素都是排序好的，所有操作都是log时间里完成。</p>
+<p>提供对数时间的插入、删除、查找的集合数据结构。底层原理是红黑树。</p>
+<table>
+<thead>
+<tr>
+<th>集合三要素</th>
+<th>解释</th>
+<th>set</th>
+<th>multiset</th>
+<th>unordered_set</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>确定性</td>
+<td>一个元素要么在集合中，要么不在</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>互异性</td>
+<td>一个元素仅可以在集合中出现一次</td>
+<td>✔</td>
+<td>❌（任意次）</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>无序性</td>
+<td>集合中的元素是没有顺序的</td>
+<td>❌（从小到大）</td>
+<td>❌（从小到大）</td>
+<td>✔</td>
+</tr>
+</tbody></table>
+<h4 id="操作：-4"><a href="#操作：-4" class="headerlink" title="操作："></a>操作：</h4><table>
+<thead>
+<tr>
+<th>作用</th>
+<th>用法</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入元素</td>
+<td><code>.insert(元素)</code></td>
+<td><code>st.insert(1);</code></td>
+</tr>
+<tr>
+<td>删除元素</td>
+<td><code>.erase(元素)</code></td>
+<td><code>st.erase(2);</code></td>
+</tr>
+<tr>
+<td>查找元素</td>
+<td><code>.find(元素)</code></td>
+<td><code>auto it = st.find(1);</code></td>
+</tr>
+<tr>
+<td>判断元素是否存在</td>
+<td><code>.count(元素)</code></td>
+<td><code>st.count(3);</code></td>
+</tr>
+<tr>
+<td>查看大小 &#x2F; 清空 &#x2F; 判空</td>
+<td>略</td>
+<td>略</td>
+</tr>
+</tbody></table>
+<p>创建:set&lt;元素类型&gt; s;</p>
+<p>清空：s.crear()</p>
+<p>插入元素：s.insert(x);&#x2F;&#x2F;如果集合中之前没有就插入并排序，否则不插入</p>
+<p>删除元素：s.erase(x)</p>
+<p>查询是否有元素x：s.count(x);&#x2F;&#x2F;返回0无，返回1有。</p>
+<p>查询元素x位置：s.find(x)；返回一个x位置的迭代器</p>
+<p>判空：s.empty();</p>
+<p>求个数：size();</p>
+<p><strong>访问</strong>：</p>
+<p>只能通过迭代器访问。不支持 iterator &lt; s.end()写法</p>
+<p>可使用迭代器进行遍历访问：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (set&lt;<span class="type">int</span>&gt;::iterator it = st.<span class="built_in">begin</span>(); it != st.<span class="built_in">end</span>(); ++it)</span><br><span class="line">    cout &lt;&lt; *it &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>基于范围的循环（C++ 11）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;ele : st)</span><br><span class="line">    cout &lt;&lt; ele &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><h4 id="不存在下标索引"><a href="#不存在下标索引" class="headerlink" title="不存在下标索引"></a>不存在下标索引</h4><p>set 虽说可遍历，但仅可使用迭代器进行遍历，它不存在下标这一概念，无法通过下标访问到数据。<strong>下面是错误用法：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; st[<span class="number">0</span>] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<h4 id="元素只读"><a href="#元素只读" class="headerlink" title="元素只读"></a>元素只读</h4><p>set 的迭代器取到的元素是只读的（因为是 const 迭代器），不可修改其值。如果要改，需要先 erase 再 insert. <strong>下面是错误用法：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; *st.<span class="built_in">begin</span>() &lt;&lt; endl; <span class="comment">// 正确。可读。</span></span><br><span class="line">*st.<span class="built_in">begin</span>() = <span class="number">1</span>;             <span class="comment">// 错误！不可写！</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="不可用迭代器计算下标"><a href="#不可用迭代器计算下标" class="headerlink" title="不可用迭代器计算下标"></a>不可用迭代器计算下标</h4><p>set 的迭代器不能像 vector 一样相减得到下标。<strong>下面是错误用法：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> it = st.<span class="built_in">find</span>(<span class="number">2</span>);      <span class="comment">// 正确，返回2所在位置的迭代器。</span></span><br><span class="line"><span class="type">int</span> idx = it - st.<span class="built_in">begin</span>(); <span class="comment">// 错误！不可相减得到下标。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="典例：自动去重并升序排序"><a href="#典例：自动去重并升序排序" class="headerlink" title="典例：自动去重并升序排序"></a>典例：自动去重并升序排序</h3><h2 id="映射map"><a href="#映射map" class="headerlink" title="映射map"></a>映射map</h2><p>map是一个键值对（key:value)的容器，对于迭代器来说，可以修改value，而不能修改key。map会根据key自动排序。</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>解释</th>
+<th>map</th>
+<th>multimap</th>
+<th>unordered_map</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>互异性</td>
+<td>一个键仅可以在映射中出现一次</td>
+<td>✔</td>
+<td>❌（任意次）</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>无序性</td>
+<td>键是没有顺序的</td>
+<td>❌（从小到大）</td>
+<td>❌（从小到大）</td>
+<td>✔</td>
+</tr>
+</tbody></table>
+<h3 id="操作：-5"><a href="#操作：-5" class="headerlink" title="操作："></a>操作：</h3><table>
+<thead>
+<tr>
+<th>作用</th>
+<th>用法</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>增 &#x2F; 改 &#x2F; 查元素</td>
+<td>中括号</td>
+<td><code>mp[1] = 2;</code></td>
+</tr>
+<tr>
+<td>查元素（返回迭代器）</td>
+<td><code>.find(元素)</code></td>
+<td><code>auto it = mp.find(1);</code></td>
+</tr>
+<tr>
+<td>删除元素</td>
+<td><code>.erase(元素)</code></td>
+<td><code>mp.erase(2);</code></td>
+</tr>
+<tr>
+<td>判断元素是否存在</td>
+<td><code>.count(元素)</code></td>
+<td><code>mp.count(3);</code></td>
+</tr>
+<tr>
+<td>查看大小 &#x2F; 清空 &#x2F; 判空</td>
+<td>略</td>
+<td>略</td>
+</tr>
+</tbody></table>
+<p>map&lt;int,string&gt; m;&#x2F;&#x2F;定义了一个空map m</p>
+<p>m.count(k);&#x2F;&#x2F;返回m中键值等于k的元素个数（1或0——</p>
+<p>m.find(k);&#x2F;&#x2F;存在返回指向该元素的迭代器，否则返回结束地址ennd()</p>
+<p>m.erase（k);&#x2F;&#x2F;删除m中<strong>键为k</strong>的元素，返回删除元素的个数（1或0）</p>
+<p>m.erase(p);&#x2F;&#x2F;从m中删除<strong>迭代器p</strong>所指向的元素</p>
+<p>m.insert(e);&#x2F;&#x2F;e是一个用在m上的value_type类型的值（一个pair）。</p>
+<p>如果键e.first不在m中，则插入一个值为e.second的新元素；如果该键在m中已存在，那么不进行任何操作。</p>
+<p>m.clear();&#x2F;&#x2F;清空map m</p>
+<p>m.empty();&#x2F;&#x2F;判断map m是否为空。</p>
+<h3 id="注意事项-2"><a href="#注意事项-2" class="headerlink" title="注意事项"></a>注意事项</h3><h4 id="中括号访问时默认值"><a href="#中括号访问时默认值" class="headerlink" title="中括号访问时默认值"></a>中括号访问时默认值</h4><p>如果使用中括号访问 map 时对应的键不存在，那么会新增这个键，并且值为默认值，因此中括号会影响键的存在性。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line">cout &lt;&lt; mp.<span class="built_in">count</span>(<span class="string">&#x27;a&#x27;</span>) &lt;&lt; endl; <span class="comment">// 0</span></span><br><span class="line">mp[<span class="string">&#x27;a&#x27;</span>];                       <span class="comment">// 即使什么都没做，此时mp[&#x27;a&#x27;]=0已经插入了</span></span><br><span class="line">cout &lt;&lt; mp.<span class="built_in">count</span>(<span class="string">&#x27;a&#x27;</span>) &lt;&lt; endl; <span class="comment">// 1</span></span><br><span class="line">cout &lt;&lt; mp[<span class="string">&#x27;a&#x27;</span>] &lt;&lt; endl;       <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="不可用迭代器计算下标-1"><a href="#不可用迭代器计算下标-1" class="headerlink" title="不可用迭代器计算下标"></a>不可用迭代器计算下标</h4><p>map 的迭代器不能像 vector 一样相减得到下标。<strong>下面是错误用法：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> it = mp.<span class="built_in">find</span>(<span class="string">&#x27;a&#x27;</span>);      <span class="comment">// 正确，返回2所在位置的迭代器。</span></span><br><span class="line"><span class="type">int</span> idx = it - mp.<span class="built_in">begin</span>();   <span class="comment">// 错误！不可相减得到下标。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="适用情形"><a href="#适用情形" class="headerlink" title="适用情形"></a>适用情形</h3><p>需要维护映射的场景可以使用：输入若干字符串，统计每种字符串的出现次数。(<code>map&lt;string, int&gt; mp</code>)</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://dmw.2025521.xyz">dmw</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://dmw.2025521.xyz/2025/03/21/c++STL/">https://dmw.2025521.xyz/2025/03/21/c++STL/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://dmw.2025521.xyz" target="_blank">dmw's blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/bg/bg-1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/19/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.19/" title="刷题日记3.19"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">刷题日记3.19</div></div><div class="info-2"><div class="info-item-1">1.埃氏筛法解决:找出所有小于等于n的质数问题。 思想：任意一个数（大于1），它的倍数均不是质数。 核心代码：vis[0]&#x3D;vis[1]&#x3D;true;&#x2F;&#x2F;1表示不是质数，被筛掉   for(int i&#x3D;2;i&lt;&#x3D;n;++i){ ​    if(!vis[i])for(ll j&#x3D;1ll  * i  * i; j&lt;&#x3D;n;j+&#x3D;i)vis[j]&#x3D;true;   } 复杂度：O(n*log(logn))， 小于1e7可用，再大用欧拉筛法 欧拉筛法欧拉筛法的核心思想是：每个合数只被它的最小质因数筛掉一次。通过这种方式，避免了埃氏筛法中合数被重复标记的问题，从而提高了效率。 1234567891011// 初始化for (int i = 2; i &lt;= n; ++i) is_prime[i] = true;// 筛选for (int i = 2; i &lt;= n; ++i) &#123;    if (is_prime[i]) prime.push_back(i); //...</div></div></div></a><a class="pagination-related" href="/2025/03/23/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.23/" title="刷题日记3.23"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-%E7%AC%91%E5%98%BB%E5%98%BB-%E7%BE%8E%E5%A5%B3.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">刷题日记3.23</div></div><div class="info-2"><div class="info-item-1">动态规划找状态转移方程。 今日题解： 12345678910111213141516171819202122232425#include&lt;bits/stdc++.h&gt;using namespace std;using ll = long long;const int N = 105;ll dp[N * N];int main() &#123;	ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);		int m, n;	cin &gt;&gt; m &gt;&gt; n;	for(int i=1;i&lt;=n;++i) &#123;//物品数量		int s, w, v;//对于每种物品而言		cin &gt;&gt; s &gt;&gt; w &gt;&gt; v;		while(s--) &#123;			for(int j = m;j&gt;=v;--j) &#123;				dp[j]=max(dp[j],dp[j-v]+w);			&#125;		&#125;	&#125;	cout &lt;&lt;...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/my/%E5%B0%8F%E5%9F%8B1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">dmw</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dmw-net"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/dmw-net" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_73995047?type=blog" target="_blank" title="CSDN"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://space.bilibili.com/437656775?spm_id_from=333.1387.0.0" target="_blank" title="哔哩哔哩"><i class="fa-brands fa-bilibili"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!Have fun!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97queue"><span class="toc-number">1.</span> <span class="toc-text">队列queue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">特点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">操作：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A%E4%B8%8D%E5%8F%AF%E8%AE%BF%E9%97%AE%E5%86%85%E9%83%A8%E5%85%83%E7%B4%A0%EF%BC%81"><span class="toc-number">1.3.</span> <span class="toc-text">注意事项：不可访问内部元素！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88stack"><span class="toc-number">2.</span> <span class="toc-text">栈stack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A-1"><span class="toc-number">2.1.</span> <span class="toc-text">特点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%EF%BC%9A-1"><span class="toc-number">2.2.</span> <span class="toc-text">操作：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-%E4%B8%8D%E5%8F%AF%E8%AE%BF%E9%97%AE%E5%86%85%E9%83%A8%E5%85%83%E7%B4%A0%EF%BC%81"><span class="toc-number">2.3.</span> <span class="toc-text">注意事项:不可访问内部元素！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B8%E4%BE%8B%EF%BC%9A%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D"><span class="toc-number">2.4.</span> <span class="toc-text">典例：括号匹配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2string"><span class="toc-number">3.</span> <span class="toc-text">字符串string</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%EF%BC%9A-2"><span class="toc-number">3.1.</span> <span class="toc-text">操作：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84%E3%80%81%E5%90%91%E9%87%8Fvector"><span class="toc-number">4.</span> <span class="toc-text">动态数组、向量vector</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%EF%BC%9A-3"><span class="toc-number">4.1.</span> <span class="toc-text">操作：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">4.2.</span> <span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E5%89%8D%E6%8C%87%E5%AE%9A%E9%95%BF%E5%BA%A6"><span class="toc-number">4.2.1.</span> <span class="toc-text">提前指定长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E5%BF%83-size-t-%E6%BA%A2%E5%87%BA"><span class="toc-number">4.2.2.</span> <span class="toc-text">当心 size_t 溢出</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B8%E4%BE%8B%EF%BC%9A%E4%BA%8C%E7%BB%B4%E5%90%91%E9%87%8F%E5%AD%98%E5%82%A8%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="toc-number">4.3.</span> <span class="toc-text">典例：二维向量存储邻接表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88set"><span class="toc-number">5.</span> <span class="toc-text">集合set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%EF%BC%9A-4"><span class="toc-number">5.0.1.</span> <span class="toc-text">操作：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="toc-number">5.1.</span> <span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%AD%98%E5%9C%A8%E4%B8%8B%E6%A0%87%E7%B4%A2%E5%BC%95"><span class="toc-number">5.1.1.</span> <span class="toc-text">不存在下标索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E5%8F%AA%E8%AF%BB"><span class="toc-number">5.1.2.</span> <span class="toc-text">元素只读</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%AE%A1%E7%AE%97%E4%B8%8B%E6%A0%87"><span class="toc-number">5.1.3.</span> <span class="toc-text">不可用迭代器计算下标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B8%E4%BE%8B%EF%BC%9A%E8%87%AA%E5%8A%A8%E5%8E%BB%E9%87%8D%E5%B9%B6%E5%8D%87%E5%BA%8F%E6%8E%92%E5%BA%8F"><span class="toc-number">5.2.</span> <span class="toc-text">典例：自动去重并升序排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%A0%E5%B0%84map"><span class="toc-number">6.</span> <span class="toc-text">映射map</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%EF%BC%9A-5"><span class="toc-number">6.1.</span> <span class="toc-text">操作：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-2"><span class="toc-number">6.2.</span> <span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E6%8B%AC%E5%8F%B7%E8%AE%BF%E9%97%AE%E6%97%B6%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="toc-number">6.2.1.</span> <span class="toc-text">中括号访问时默认值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%AE%A1%E7%AE%97%E4%B8%8B%E6%A0%87-1"><span class="toc-number">6.2.2.</span> <span class="toc-text">不可用迭代器计算下标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-number">6.3.</span> <span class="toc-text">适用情形</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/03/23/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.23/" title="刷题日记3.23"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-%E7%AC%91%E5%98%BB%E5%98%BB-%E7%BE%8E%E5%A5%B3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题日记3.23"/></a><div class="content"><a class="title" href="/2025/03/23/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.23/" title="刷题日记3.23">刷题日记3.23</a><time datetime="2025-03-22T16:00:00.000Z" title="发表于 2025-03-23 00:00:00">2025-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/21/c++STL/" title="C++STL"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++STL"/></a><div class="content"><a class="title" href="/2025/03/21/c++STL/" title="C++STL">C++STL</a><time datetime="2025-03-20T16:00:00.000Z" title="发表于 2025-03-21 00:00:00">2025-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/19/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.19/" title="刷题日记3.19"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题日记3.19"/></a><div class="content"><a class="title" href="/2025/03/19/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.19/" title="刷题日记3.19">刷题日记3.19</a><time datetime="2025-03-18T16:00:00.000Z" title="发表于 2025-03-19 00:00:00">2025-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/13/Redis/" title="Redis"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-%E5%89%91%E5%AE%A2-%E6%B0%B4%E5%A2%A8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis"/></a><div class="content"><a class="title" href="/2025/03/13/Redis/" title="Redis">Redis</a><time datetime="2025-03-12T16:00:00.000Z" title="发表于 2025-03-13 00:00:00">2025-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/03/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/" title="苍穹外卖"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-%E5%8A%A8%E6%BC%AB-%E8%9C%A1%E7%AC%94%E5%B0%8F%E6%96%B0.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="苍穹外卖"/></a><div class="content"><a class="title" href="/2025/03/03/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/" title="苍穹外卖">苍穹外卖</a><time datetime="2025-03-02T16:00:00.000Z" title="发表于 2025-03-03 00:00:00">2025-03-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By dmw</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://comment.2025521.xyz/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://dmw.2025521.xyz/categories/算法/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">👩‍💻 算法刷题学习记录 (5)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://dmw.2025521.xyz/categories/计算机基础/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 dmwの读书笔记 (3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://dmw.2025521.xyz/categories/博客相关/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💡 dmwのblog (3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://dmw.2025521.xyz/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #ff9300}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var qweather_key = '198f241800fe4988a2a8a436e076a927';
+  var gaud_map_key = 'd6dff26893beae2e1542acfb5e2bc450';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '112.935066,28.235059';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v7.3.0" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v5.3.2" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站主线路托管于Vercel" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" title=""><img alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/footer.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2025/02/04/Java基础复盘/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-动漫-蜡笔小新.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-04</span><a class="blog-slider__title" href="2025/02/04/Java基础复盘/" alt="">Java基础复盘</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2025/02/04/Java基础复盘/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2025/01/29/关于本站/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-2.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-29</span><a class="blog-slider__title" href="2025/01/29/关于本站/" alt="">关于本站</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2025/01/29/关于本站/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '1s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '2');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
