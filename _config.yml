@@ -103,7 +103,7 @@ theme: butterfly
 deploy:
   type: 'git'
   repository: git@github.com:dmw-net/dmw-net.github.io.git
-  branch: gh-pages
+  branch: main
 
 #本地搜索
 search:
