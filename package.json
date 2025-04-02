@@ -20,6 +20,7 @@
     "hexo-butterfly-swiper": "^1.0.12",
     "hexo-butterfly-wowjs": "^1.0.5",
     "hexo-cli": "^4.3.2",
+    "hexo-deployer-git": "^4.0.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^4.0.0",
