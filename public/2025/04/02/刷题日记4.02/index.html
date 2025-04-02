@@ -1,0 +1,384 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>刷题日记4.02 | dmw's blog</title><meta name="author" content="dmw"><meta name="copyright" content="dmw"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="今天刷洛谷题基础stl题。 1.CF112A Petya and Strings题目描述输入两个字符串，大小写无关紧要，比较它们的大小。 输入格式两个字符串（保证长度相等） 输出格式如果第一个字符串小于第二个字符串，则输出“-1”。如果第二个字符串小于第一个字符串，则输出“1”。如果字符串相同，则打印“0”。请注意，比较字符串时不考虑字母的大小写。 输入输出样例 #1输入 #112aaaaaaaA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="刷题日记4.02">
+<meta property="og:url" content="https://dmw.2025521.xyz/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/index.html">
+<meta property="og:site_name" content="dmw&#39;s blog">
+<meta property="og:description" content="今天刷洛谷题基础stl题。 1.CF112A Petya and Strings题目描述输入两个字符串，大小写无关紧要，比较它们的大小。 输入格式两个字符串（保证长度相等） 输出格式如果第一个字符串小于第二个字符串，则输出“-1”。如果第二个字符串小于第一个字符串，则输出“1”。如果字符串相同，则打印“0”。请注意，比较字符串时不考虑字母的大小写。 输入输出样例 #1输入 #112aaaaaaaA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dmw.2025521.xyz/img/bg/bg-%E7%AC%91%E5%98%BB%E5%98%BB-%E7%BE%8E%E5%A5%B3.png">
+<meta property="article:published_time" content="2025-04-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-01T16:00:00.000Z">
+<meta property="article:author" content="dmw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dmw.2025521.xyz/img/bg/bg-%E7%AC%91%E5%98%BB%E5%98%BB-%E7%BE%8E%E5%A5%B3.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "刷题日记4.02",
+  "url": "https://dmw.2025521.xyz/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/",
+  "image": "https://dmw.2025521.xyz/img/bg/bg-%E7%AC%91%E5%98%BB%E5%98%BB-%E7%BE%8E%E5%A5%B3.png",
+  "datePublished": "2025-04-01T16:00:00.000Z",
+  "dateModified": "2025-04-01T16:00:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "dmw",
+      "url": "https://dmw.2025521.xyz/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/my/%E5%B0%8F%E5%9F%8B1.jpg"><link rel="canonical" href="https://dmw.2025521.xyz/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '刷题日记4.02',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/progress_bar.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="/css/footer.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/progress_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg" style="background-image: url(/img/bg/bg-1.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/my/%E5%B0%8F%E5%9F%8B1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope-open"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/bg/bg-笑嘻嘻-美女.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/my/logo.jpg" alt="Logo"><span class="site-name">dmw's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">刷题日记4.02</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope-open"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">刷题日记4.02</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-01T16:00:00.000Z" title="发表于 2025-04-02 00:00:00">2025-04-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-01T16:00:00.000Z" title="更新于 2025-04-02 00:00:00">2025-04-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span class="waline-pageview-count" data-path="/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/#post-comment"><span class="waline-comment-count" data-path="/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>今天刷洛谷题基础stl题。</p>
+<h1 id="1-CF112A-Petya-and-Strings"><a href="#1-CF112A-Petya-and-Strings" class="headerlink" title="1.CF112A Petya and Strings"></a>1.CF112A Petya and Strings</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个字符串，大小写无关紧要，比较它们的大小。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>两个字符串（保证长度相等）</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>如果第一个字符串小于第二个字符串，则输出“-1”。如果第二个字符串小于第一个字符串，则输出“1”。如果字符串相同，则打印“0”。请注意，比较字符串时不考虑字母的大小写。</p>
+<h2 id="输入输出样例-1"><a href="#输入输出样例-1" class="headerlink" title="输入输出样例 #1"></a>输入输出样例 #1</h2><h3 id="输入-1"><a href="#输入-1" class="headerlink" title="输入 #1"></a>输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aaaa</span><br><span class="line">aaaA</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-1"><a href="#输出-1" class="headerlink" title="输出 #1"></a>输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入输出样例-2"><a href="#输入输出样例-2" class="headerlink" title="输入输出样例 #2"></a>输入输出样例 #2</h2><h3 id="输入-2"><a href="#输入-2" class="headerlink" title="输入 #2"></a>输入 #2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">abs</span><br><span class="line">Abz</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-2"><a href="#输出-2" class="headerlink" title="输出 #2"></a>输出 #2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入输出样例-3"><a href="#输入输出样例-3" class="headerlink" title="输入输出样例 #3"></a>输入输出样例 #3</h2><h3 id="输入-3"><a href="#输入-3" class="headerlink" title="输入 #3"></a>输入 #3</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">abcdefg</span><br><span class="line">AbCdEfF</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-3"><a href="#输出-3" class="headerlink" title="输出 #3"></a>输出 #3</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h2 id="今日题解："><a href="#今日题解：" class="headerlink" title="今日题解："></a>今日题解：</h2><p>题目大意是大小写无关的字符串字典序比较，需要我们先统一一下大小写。利用ASCII码进行大小写转换，A-&gt;65 a-&gt;97</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	string s1, s2;</span><br><span class="line">	cin&gt;&gt;s1&gt;&gt;s2;</span><br><span class="line">	<span class="type">int</span> len=s<span class="number">1.</span><span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;len; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span>(s1[i]&gt;=<span class="string">&#x27;A&#x27;</span> &amp;&amp; s1[i]&lt;<span class="string">&#x27;a&#x27;</span>) &#123;</span><br><span class="line">			s1[i]=s1[i]<span class="number">+32</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(s2[i]&gt;=<span class="string">&#x27;A&#x27;</span> &amp;&amp; s2[i]&lt;<span class="string">&#x27;a&#x27;</span>) &#123;</span><br><span class="line">			s2[i]=s2[i]<span class="number">+32</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(s1&gt;s2) &#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;1\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(s1&lt;s2) &#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;-1\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(s1==s2) &#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;0\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-CF44A-Indian-Summer"><a href="#2-CF44A-Indian-Summer" class="headerlink" title="2.CF44A Indian Summer"></a>2.CF44A Indian Summer</h1><h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>Indian summer is such a beautiful time of the year! A girl named Alyona is walking in the forest and picking a bouquet from fallen leaves. Alyona is very choosy — she doesn’t take a leaf if it matches the color and the species of the tree of one of the leaves she already has. Find out how many leaves Alyona has picked.</p>
+<h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>The first line contains an integer $ n $ ( $ 1&lt;&#x3D;n&lt;&#x3D;100 $ ) — the number of leaves Alyona has found. The next $ n $ lines contain the leaves’ descriptions. Each leaf is characterized by the species of the tree it has fallen from and by the color. The species of the trees and colors are given in names, consisting of no more than $ 10 $ lowercase Latin letters. A name can not be an empty string. The species of a tree and the color are given in each line separated by a space.</p>
+<h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>Output the single number — the number of Alyona’s leaves.</p>
+<h2 id="输入输出样例-1-1"><a href="#输入输出样例-1-1" class="headerlink" title="输入输出样例 #1"></a>输入输出样例 #1</h2><h3 id="输入-1-1"><a href="#输入-1-1" class="headerlink" title="输入 #1"></a>输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">birch yellow</span><br><span class="line">maple red</span><br><span class="line">birch yellow</span><br><span class="line">maple yellow</span><br><span class="line">maple green</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-1-1"><a href="#输出-1-1" class="headerlink" title="输出 #1"></a>输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入输出样例-2-1"><a href="#输入输出样例-2-1" class="headerlink" title="输入输出样例 #2"></a>输入输出样例 #2</h2><h3 id="输入-2-1"><a href="#输入-2-1" class="headerlink" title="输入 #2"></a>输入 #2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">oak yellow</span><br><span class="line">oak yellow</span><br><span class="line">oak yellow</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-2-1"><a href="#输出-2-1" class="headerlink" title="输出 #2"></a>输出 #2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<h2 id="今日题解：-1"><a href="#今日题解：-1" class="headerlink" title="今日题解："></a>今日题解：</h2><p>题目大意是要我们找出键值都不重复的元素个数。注意set元素为对的声明为set&lt;pair&lt;type,type&gt;&gt; s;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">	set&lt;pair&lt;string, string&gt;&gt; s;</span><br><span class="line">	<span class="keyword">while</span>(n--) &#123;</span><br><span class="line">		string s1, s2;	</span><br><span class="line">		cin&gt;&gt;s1&gt;&gt;s2;</span><br><span class="line">		s.<span class="built_in">insert</span>(&#123;s1, s2&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;s.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-CF45C-Dancing-Lessons"><a href="#3-CF45C-Dancing-Lessons" class="headerlink" title="3.CF45C Dancing Lessons"></a>3.CF45C Dancing Lessons</h1><h2 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h2><p>There are $ n $ people taking dancing lessons. Every person is characterized by his&#x2F;her dancing skill $ a_{i} $ . At the beginning of the lesson they line up from left to right. While there is at least one couple of a boy and a girl in the line, the following process is repeated: the boy and girl who stand next to each other, having the minimal difference in dancing skills start to dance. If there are several such couples, the one first from the left starts to dance. After a couple leaves to dance, the line closes again, i.e. as a result the line is always continuous. The difference in dancing skills is understood as the absolute value of difference of $ a_{i} $ variable. Your task is to find out what pairs and in what order will start dancing.</p>
+<h2 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h2><p>The first line contains an integer $ n $ ( $ 1&lt;&#x3D;n&lt;&#x3D;2·10^{5} $ ) — the number of people. The next line contains $ n $ symbols B or G without spaces. B stands for a boy, G stands for a girl. The third line contains $ n $ space-separated integers $ a_{i} $ ( $ 1&lt;&#x3D;a_{i}&lt;&#x3D;10^{7} $ ) — the dancing skill. People are specified from left to right in the order in which they lined up.</p>
+<h2 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式"></a>输出格式</h2><p>Print the resulting number of couples $ k $ . Then print $ k $ lines containing two numerals each — the numbers of people forming the couple. The people are numbered with integers from $ 1 $ to $ n $ from left to right. When a couple leaves to dance you shouldn’t renumber the people. The numbers in one couple should be sorted in the increasing order. Print the couples in the order in which they leave to dance.</p>
+<p>题意翻译<br>有n个人在上舞蹈课，每个人都有相应的舞蹈技能。记录男女在一起直到结尾，然后选出男女差值最小的一对，如果有多对，就从左往右输出，选出后剩下的成员紧密排在一起，直到不能找到男女搭配。问：输出组合对数，并且每队成员最初时的位置标号。</p>
+<h2 id="输入输出样例-1-2"><a href="#输入输出样例-1-2" class="headerlink" title="输入输出样例 #1"></a>输入输出样例 #1</h2><h3 id="输入-1-2"><a href="#输入-1-2" class="headerlink" title="输入 #1"></a>输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">BGBG</span><br><span class="line">4 2 4 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-1-2"><a href="#输出-1-2" class="headerlink" title="输出 #1"></a>输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">3 4</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入输出样例-2-2"><a href="#输入输出样例-2-2" class="headerlink" title="输入输出样例 #2"></a>输入输出样例 #2</h2><h3 id="输入-2-2"><a href="#输入-2-2" class="headerlink" title="输入 #2"></a>输入 #2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">BBGG</span><br><span class="line">4 6 1 5</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-2-2"><a href="#输出-2-2" class="headerlink" title="输出 #2"></a>输出 #2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">2 3</span><br><span class="line">1 4</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入输出样例-3-1"><a href="#输入输出样例-3-1" class="headerlink" title="输入输出样例 #3"></a>输入输出样例 #3</h2><h3 id="输入-3-1"><a href="#输入-3-1" class="headerlink" title="输入 #3"></a>输入 #3</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">BGBB</span><br><span class="line">1 1 2 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-3-1"><a href="#输出-3-1" class="headerlink" title="输出 #3"></a>输出 #3</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
+
+<h2 id="今日题解"><a href="#今日题解" class="headerlink" title="今日题解"></a>今日题解</h2><p>大致思路：利用优先队列最大堆实现自动排序，注意比较函数的重写，实现最小堆。每次弹出优先队列后要注意判断是否已经遍历过和判断一下如果在原队伍中(此队伍靠更新元素自己的邻居索引动态更新)删除这两个元素是否能够组成新的入优先队列的元素。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, k, ans[<span class="number">2</span>][<span class="number">100005</span>];</span><br><span class="line">string s;<span class="comment">//存储性别字符串</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">people</span> &#123;</span><br><span class="line">	<span class="type">int</span> a;<span class="comment">//能力值</span></span><br><span class="line">	<span class="type">int</span> l, r;<span class="comment">//左右邻居索引</span></span><br><span class="line">	<span class="type">bool</span> x, vis;<span class="comment">//性别0男1女 vis表示是否选出过</span></span><br><span class="line">&#125; a[<span class="number">200005</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">peoples</span> &#123;</span><br><span class="line">	<span class="type">int</span> a;<span class="comment">//能力差值</span></span><br><span class="line">	<span class="type">int</span> l, r;<span class="comment">//此差值的两个原始位置</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;peoples&gt; pq;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>&lt; (peoples a, peoples b) &#123;</span><br><span class="line">	<span class="keyword">if</span>(a.a == b.a) <span class="keyword">return</span> a.l &gt; b.l;</span><br><span class="line">	<span class="keyword">return</span> a.a&gt;b.a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;s;</span><br><span class="line">	<span class="comment">//初始化a数组</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) &#123;</span><br><span class="line">		cin&gt;&gt;a[i].a;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(i==<span class="number">1</span>) a[i].l=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">else</span> a[i].l = i<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span>(i==n) a[i].r = i;</span><br><span class="line">		<span class="keyword">else</span> a[i].r = i<span class="number">+1</span>;</span><br><span class="line">		</span><br><span class="line">		a[i].x=(s[i<span class="number">-1</span>] == <span class="string">&#x27;G&#x27;</span>);</span><br><span class="line">		<span class="comment">//如果相邻性别不同，将其插入队列</span></span><br><span class="line">		<span class="keyword">if</span>(a[i].x != a[i<span class="number">-1</span>].x)&#123;</span><br><span class="line">			pq.<span class="built_in">push</span>(peoples&#123;<span class="built_in">abs</span>(a[i].a-a[i<span class="number">-1</span>].a), i<span class="number">-1</span>, i&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(!pq.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		<span class="comment">//记录本次最优对</span></span><br><span class="line">		<span class="type">int</span> l=pq.<span class="built_in">top</span>().l, r=pq.<span class="built_in">top</span>().r;</span><br><span class="line">		pq.<span class="built_in">pop</span>();<span class="comment">//弹出</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(a[l].vis&amp;&amp;a[r].vis)<span class="keyword">continue</span>;<span class="comment">//但凡已选过，则跳过，下一个</span></span><br><span class="line">		</span><br><span class="line">		k++;<span class="comment">//每次对数+1</span></span><br><span class="line">		ans[<span class="number">0</span>][k]=l;<span class="comment">//记录左位置</span></span><br><span class="line">		ans[<span class="number">1</span>][k]=r;<span class="comment">//记录右位置</span></span><br><span class="line">		<span class="comment">//标记已选过</span></span><br><span class="line">		a[l].vis=<span class="literal">true</span>;</span><br><span class="line">		a[r].vis=<span class="literal">true</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//合并剩下的区间，看是否能加入pq</span></span><br><span class="line">        <span class="comment">// 先获取新的左右邻居</span></span><br><span class="line">        l = a[l].l;</span><br><span class="line">        r = a[r].r;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新邻居关系</span></span><br><span class="line">        a[l].r = r;</span><br><span class="line">        a[r].l = l;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(l&gt;<span class="number">0</span> &amp;&amp; r&lt;=n &amp;&amp; a[l].x!=a[r].x) &#123;</span><br><span class="line">			pq.<span class="built_in">push</span>(peoples&#123;<span class="built_in">abs</span>(a[l].a-a[r].a), l, a[l].r&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	cout&lt;&lt;k&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=k;++i) &#123;</span><br><span class="line">		cout&lt;&lt;ans[<span class="number">0</span>][i]&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;ans[<span class="number">1</span>][i]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://dmw.2025521.xyz">dmw</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://dmw.2025521.xyz/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/">https://dmw.2025521.xyz/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://dmw.2025521.xyz" target="_blank">dmw's blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/bg/bg-%E7%AC%91%E5%98%BB%E5%98%BB-%E7%BE%8E%E5%A5%B3.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/03/23/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.23/" title="刷题日记3.23"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">刷题日记3.23</div></div><div class="info-2"><div class="info-item-1">动态规划找状态转移方程。 今日题解： 12345678910111213141516171819202122232425#include&lt;bits/stdc++.h&gt;using namespace std;using ll = long long;const int N = 105;ll dp[N * N];int main() &#123;	ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);		int m, n;	cin &gt;&gt; m &gt;&gt; n;	for(int i=1;i&lt;=n;++i) &#123;//物品数量		int s, w, v;//对于每种物品而言		cin &gt;&gt; s &gt;&gt; w &gt;&gt; v;		while(s--) &#123;			for(int j = m;j&gt;=v;--j) &#123;				dp[j]=max(dp[j],dp[j-v]+w);			&#125;		&#125;	&#125;	cout &lt;&lt;...</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/my/%E5%B0%8F%E5%9F%8B1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">dmw</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dmw-net"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/dmw-net" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_73995047?type=blog" target="_blank" title="CSDN"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://space.bilibili.com/437656775?spm_id_from=333.1387.0.0" target="_blank" title="哔哩哔哩"><i class="fa-brands fa-bilibili"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my Blog!Have fun!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-CF112A-Petya-and-Strings"><span class="toc-number">1.</span> <span class="toc-text">1.CF112A Petya and Strings</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-1"><span class="toc-number">1.4.</span> <span class="toc-text">输入输出样例 #1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">输入 #1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1"><span class="toc-number">1.4.2.</span> <span class="toc-text">输出 #1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-2"><span class="toc-number">1.5.</span> <span class="toc-text">输入输出样例 #2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-2"><span class="toc-number">1.5.1.</span> <span class="toc-text">输入 #2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-2"><span class="toc-number">1.5.2.</span> <span class="toc-text">输出 #2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-3"><span class="toc-number">1.6.</span> <span class="toc-text">输入输出样例 #3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-3"><span class="toc-number">1.6.1.</span> <span class="toc-text">输入 #3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-3"><span class="toc-number">1.6.2.</span> <span class="toc-text">输出 #3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8A%E6%97%A5%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="toc-number">1.7.</span> <span class="toc-text">今日题解：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-CF44A-Indian-Summer"><span class="toc-number">2.</span> <span class="toc-text">2.CF44A Indian Summer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">2.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">2.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-1-1"><span class="toc-number">2.4.</span> <span class="toc-text">输入输出样例 #1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-1-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">输入 #1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">输出 #1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-2-1"><span class="toc-number">2.5.</span> <span class="toc-text">输入输出样例 #2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-2-1"><span class="toc-number">2.5.1.</span> <span class="toc-text">输入 #2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-2-1"><span class="toc-number">2.5.2.</span> <span class="toc-text">输出 #2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8A%E6%97%A5%E9%A2%98%E8%A7%A3%EF%BC%9A-1"><span class="toc-number">2.6.</span> <span class="toc-text">今日题解：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-CF45C-Dancing-Lessons"><span class="toc-number">3.</span> <span class="toc-text">3.CF45C Dancing Lessons</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">3.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">3.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-1-2"><span class="toc-number">3.4.</span> <span class="toc-text">输入输出样例 #1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-1-2"><span class="toc-number">3.4.1.</span> <span class="toc-text">输入 #1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1-2"><span class="toc-number">3.4.2.</span> <span class="toc-text">输出 #1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-2-2"><span class="toc-number">3.5.</span> <span class="toc-text">输入输出样例 #2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-2-2"><span class="toc-number">3.5.1.</span> <span class="toc-text">输入 #2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-2-2"><span class="toc-number">3.5.2.</span> <span class="toc-text">输出 #2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-3-1"><span class="toc-number">3.6.</span> <span class="toc-text">输入输出样例 #3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-3-1"><span class="toc-number">3.6.1.</span> <span class="toc-text">输入 #3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-3-1"><span class="toc-number">3.6.2.</span> <span class="toc-text">输出 #3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8A%E6%97%A5%E9%A2%98%E8%A7%A3"><span class="toc-number">3.7.</span> <span class="toc-text">今日题解</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/" title="刷题日记4.02"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-%E7%AC%91%E5%98%BB%E5%98%BB-%E7%BE%8E%E5%A5%B3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题日记4.02"/></a><div class="content"><a class="title" href="/2025/04/02/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B04.02/" title="刷题日记4.02">刷题日记4.02</a><time datetime="2025-04-01T16:00:00.000Z" title="发表于 2025-04-02 00:00:00">2025-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/23/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.23/" title="刷题日记3.23"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题日记3.23"/></a><div class="content"><a class="title" href="/2025/03/23/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.23/" title="刷题日记3.23">刷题日记3.23</a><time datetime="2025-03-22T16:00:00.000Z" title="发表于 2025-03-23 00:00:00">2025-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/21/c++STL/" title="C++STL"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-%E5%89%91%E5%AE%A2-%E6%B0%B4%E5%A2%A8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++STL"/></a><div class="content"><a class="title" href="/2025/03/21/c++STL/" title="C++STL">C++STL</a><time datetime="2025-03-20T16:00:00.000Z" title="发表于 2025-03-21 00:00:00">2025-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/19/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.19/" title="刷题日记3.19"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-%E5%8A%A8%E6%BC%AB-%E8%9C%A1%E7%AC%94%E5%B0%8F%E6%96%B0.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题日记3.19"/></a><div class="content"><a class="title" href="/2025/03/19/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B03.19/" title="刷题日记3.19">刷题日记3.19</a><time datetime="2025-03-18T16:00:00.000Z" title="发表于 2025-03-19 00:00:00">2025-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/13/Redis/" title="Redis"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-%E7%AC%91%E5%98%BB%E5%98%BB-%E7%BE%8E%E5%A5%B3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis"/></a><div class="content"><a class="title" href="/2025/03/13/Redis/" title="Redis">Redis</a><time datetime="2025-03-12T16:00:00.000Z" title="发表于 2025-03-13 00:00:00">2025-03-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By dmw</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://comment.2025521.xyz/',
+      pageview: true,
+      dark: 'html[data-theme="dark"]',
+      comment: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://dmw.2025521.xyz/categories/算法/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">👩‍💻 算法刷题学习记录 (6)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://dmw.2025521.xyz/categories/计算机基础/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 dmwの读书笔记 (3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://dmw.2025521.xyz/categories/博客相关/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">💡 dmwのblog (3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://dmw.2025521.xyz/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #ff9300}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var qweather_key = '198f241800fe4988a2a8a436e076a927';
+  var gaud_map_key = 'd6dff26893beae2e1542acfb5e2bc450';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '112.935066,28.235059';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v7.3.0" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v5.3.2" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站主线路托管于Vercel" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" title=""><img alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/footer.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '1s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '2');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2025/01/29/关于本站/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-2.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-01-29</span><a class="blog-slider__title" href="2025/01/29/关于本站/" alt="">关于本站</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2025/01/29/关于本站/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2025/02/04/Java基础复盘/" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/bg/bg-动漫-蜡笔小新.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2025-02-04</span><a class="blog-slider__title" href="2025/02/04/Java基础复盘/" alt="">Java基础复盘</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2025/02/04/Java基础复盘/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
