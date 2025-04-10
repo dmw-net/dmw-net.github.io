@@ -72,7 +72,7 @@ avatar:
 disable_top_img: false
 
 # 如果页面未设置横幅，则显示默认的横幅图片
-default_top_img: /img/bg/bg-1.jpg
+default_top_img: /img/bg/bg-海景.png
 
 
 # 主页的横幅图片
@@ -102,7 +102,7 @@ footer_img: false
 # 网站背景
 # 可以设置为颜色或图片
 # 图片格式: url(http://xxxxxx.com/xxx.jpg)
-background: /img/bg/bg-1.jpg
+background: /img/bg/bg-海景.png
 
 # 封面设置
 cover:
@@ -115,11 +115,11 @@ cover:
   position: both
   # 当未设置封面时，显示默认封面
   default_cover:
-      - /img/bg/bg-1.jpg
-      - /img/bg/bg-2.jpg
+      - /img/bg/bg-海景.png
       - /img/bg/bg-剑客-水墨.png
-      - /img/bg/bg-笑嘻嘻-美女.png
-      - /img/bg/bg-动漫-蜡笔小新.png
+      - /img/bg/bg-人物-动漫-动漫壁纸.png
+      - /img/bg/bg-人物壁纸-少女.png
+      - /img/bg/- /img/bg/bg-人物壁纸-少女.png
 
 # 替换损坏的图片
 error_img:
