@@ -72,7 +72,7 @@ avatar:
 disable_top_img: false
 
 # 如果页面未设置横幅，则显示默认的横幅图片
-default_top_img: /img/bg/bg-海景.png
+default_top_img: 
 
 
 # 主页的横幅图片
