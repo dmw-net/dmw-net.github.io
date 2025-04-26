@@ -876,7 +876,7 @@ public class Student {
 }
 ```
 
-@Autowired默认采用byType的方式进行自动装配，也就是说会使用类型进行配，那么要是出现了多个相同类型的Bean，如果我们想要指定使用其中的某一个该怎么办呢？                
+@Autowired默认采用byType的方式进行自动装配，也就是说会使用类型进行装配，那么要是出现了多个相同类型的Bean，如果我们想要指定使用其中的某一个该怎么办呢？                
 
 ```java
 @Bean("a")
@@ -924,7 +924,7 @@ public class Student {
 - @Resource默认**ByName**如果找不到则**ByType**，可以添加到set方法、字段上。
 - @Autowired默认是**byType**，只会根据类型寻找，可以添加在构造方法、set方法、字段、方法参数上。
 
-因为@Resource的匹配机制更加合理高效，因此官方并不推荐使用@Autowired字段注入，当然，实际上Spring官方更推荐我们使用基于构造方法或是Setter的@Autowired注入，比如Setter 注入的一个好处是，Setter 方法使该类的对象能够在以后重新配置或重新注入。其实，最后使用哪个注解，还是看你自己，要是有强迫症不能忍受黄标但是又实在想用字段注入，那就用@Resource注解。
+因为@Resource的匹配机制更加合理高效，因此idea官方并不推荐使用@Autowired字段注入，当然，实际上Spring官方更推荐我们使用基于构造方法或是Setter的@Autowired注入，比如Setter 注入的一个好处是，Setter 方法使该类的对象能够在以后重新配置或重新注入。其实，最后使用哪个注解，还是看你自己，要是有强迫症不能忍受黄标但是又实在想用字段注入，那就用@Resource注解。
 
 除了这个注解之外，还有@PostConstruct和@PreDestroy，它们效果和init-method和destroy-method是一样的：       
 
