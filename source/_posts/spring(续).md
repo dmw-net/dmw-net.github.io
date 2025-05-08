@@ -101,3 +101,126 @@ public interface DataSource  extends CommonDataSource, Wrapper {
 - UNPOOLED   不使用连接池的数据源
 - POOLED    使用连接池的数据源
 - JNDI     使用JNDI实现的数据源
+
+## spring+mybatis
+
+### 使用配置文件实现
+
+1.注解类里注册SqlSessionFactory的bean 
+
+```java
+@Configuration
+@ComponentScan("org.example.entity")
+public class MainConfiguration {
+  	//注册SqlSessionTemplate的Bean
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplate() throws IOException {
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsReader("mybatis-config.xml"));
+        return new SqlSessionTemplate(factory);
+    }
+}
+```
+
+2.配置文件写数据库源：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/study"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+  	<mappers>
+        <mapper class="org.example.mapper.TestMapper"/>
+    </mappers>
+</configuration>
+```
+
+3.随便编写一个测试的Mapper类：                       
+
+```java
+@Data
+public class Student {
+    private int sid;
+    private String name;
+    private String sex;
+}                          
+```
+
+```java
+public interface TestMapper {
+    @Select("select * from student where sid = 1")
+    Student getStudent();
+}
+```
+
+```java
+public static void main(String[] args) {
+    ApplicationContext context = new AnnotationConfigApplicationContext(MainConfiguration.class);
+    SqlSessionTemplate template = context.getBean(SqlSessionTemplate.class);
+    TestMapper testMapper = template.getMapper(TestMapper.class);
+    System.out.println(testMapper.getStudent());
+}
+```
+
+如果我们希望**让Spring直接帮助我们管理所有的Mapper**，当需要时，可以直接从容器中获取，我们可以直接在配置类上方添加**mapper扫描注解**：                          
+
+```java
+@Configuration
+@ComponentScan("org.example.entity")
+@MapperScan("org.example.mapper")
+public class MainConfiguration {
+```
+
+这样，Mybatis就会自动扫描对应包下所有的接口，并直接被注册为对应的Mapper作为Bean管理，那么我们现在就可以直接通过容器获取了：                       
+
+```java
+public static void main(String[] args) {
+    ApplicationContext context = new AnnotationConfigApplicationContext(MainConfiguration.class);
+    TestMapper mapper = context.getBean(TestMapper.class);
+    System.out.println(mapper.getStudent());
+}
+```
+
+### 不使用配置文件来实现
+
+请一定注意，必须存在`SqlSessionTemplate`或是`SqlSessionFactoryBean`的Bean，否则会无法初始化（毕竟要数据库的链接信息）我们接着来看，如果我们希望直接去除Mybatis的配置文件，完全实现全注解配置，那么改怎么去实现呢？我们可以使用`SqlSessionFactoryBean`类：                         
+
+```java
+@Configuration
+@ComponentScan("org.example.entity")
+@MapperScan("org.example.mapper")
+public class MainConfiguration {
+    @Bean   //单独创建一个Bean，方便之后更换
+    public DataSource dataSource(){
+        return new PooledDataSource("com.mysql.cj.jdbc.Driver",
+                "jdbc:mysql://localhost:3306/study", "root", "123456");
+    }
+
+    @Bean
+    public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource){  //直接参数得到Bean对象
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        return bean;
+    }
+}
+```
+
+首先我们需要创建一个数据源的实现类，因为这是数据库最基本的信息，然后再给到`SqlSessionFactoryBean`实例，这样，我们相当于直接在一开始通过IoC容器配置了`SqlSessionFactory`，这里只需要传入一个`DataSource`的实现即可，我们采用池化数据源。
+
+删除配置文件，重新再来运行，同样可以正常使用Mapper。从这里开始，通过IoC容器，Mybatis已经不再需要使用配置文件了，在我们之后的学习中，基于Spring的开发将不会再出现Mybatis的配置文件。
+
+## spring事务
+
+![image-20250506172304164](spring(续)/image-20250506172304164.png)
+
